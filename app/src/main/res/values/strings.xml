@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Dual CPU Sell Notifier</string>
+    <string name="str_notification_service">Notification Service</string>
+    <string name="preferences_name">kr.co.2cpu.sell.notify.service.preferences</string>
+</resources>
