@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.IBinder;
-import android.preference.Preference;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 
@@ -17,10 +16,10 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.firebase.client.ValueEventListener;
 
 /**
  * Created by Akisazaki on 2016-04-28.
+ * This Class for Notification service
  */
 public class NotifyService extends Service implements ChildEventListener {
 
@@ -30,6 +29,7 @@ public class NotifyService extends Service implements ChildEventListener {
     private Firebase firebase;
     private SharedPreferences preferences;
     private Query query;
+    private NotificationCompat.Builder builder;
 
     int getReadedNumber() {
         return preferences.getInt(PREFERENCES_KEY_READED_NUMBER, 0);
@@ -46,7 +46,14 @@ public class NotifyService extends Service implements ChildEventListener {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        builder = new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentTitle("2cpu");
+        builder.setVibrate(new long[]{500, 500, 500, 500});
+
         preferences = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
+
         Firebase.setAndroidContext(this);
     }
 
@@ -79,9 +86,6 @@ public class NotifyService extends Service implements ChildEventListener {
     }
 
     private void buildNotification(SellItem item) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setContentTitle("2cpu");
         builder.setContentText(item.content);
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.link));
