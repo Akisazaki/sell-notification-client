@@ -50,7 +50,7 @@ public class NotifyService extends Service implements ChildEventListener {
         builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle("2cpu");
-        builder.setVibrate(new long[]{500, 500, 500, 500});
+        builder.setVibrate(new long[]{250, 250, 250, 250});
 
         preferences = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
 
