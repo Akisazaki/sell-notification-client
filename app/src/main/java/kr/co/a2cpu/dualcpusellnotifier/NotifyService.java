@@ -69,7 +69,8 @@ public class NotifyService extends Service implements ChildEventListener {
             onRunning = true;
             onStart();
         }
-        return super.onStartCommand(intent, flags, startId);
+        // int result = super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     @Nullable
